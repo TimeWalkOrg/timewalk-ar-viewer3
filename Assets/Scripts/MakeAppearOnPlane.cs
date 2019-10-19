@@ -6,11 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-// TO DO: Ignore slider touches (don't move the model when touching sliders)
-// TO DO: Enable Menu button to bring up sliders and controls
-// TO DO: Allow user to switch models (buildings, trains, etc.)
-
-
 /// <summary>
 /// Moves the ARSessionOrigin in such a way that it makes the given content appear to be
 /// at a given location acquired via a raycast.
@@ -101,6 +96,7 @@ public class MakeAppearOnPlane : MonoBehaviour
             // such that the content appears to be at the raycast hit position.
             m_SessionOrigin.MakeContentAppearAt(content, hitPose.position, m_Rotation);
 
+            debugText.text = "New hitPose in MakeAppear";
 
             // DELETE THIS BELOW?
             foreach (Transform child in content)

@@ -82,7 +82,7 @@ public class timeWalkController : MonoBehaviour
         objectNameString = myObj.name;
         objectNameString = objectNameString.Substring(5);
         objectNameText.text = objectNameString.Replace("(Clone)", "");
-        Debug.Log("New object: " + objectNameText.text);
+        debugText.text = "New object: " + objectNameText.text;
         // myObj.transform.position = transform.position; // NO: instead we will use the object's default position
 
         currentObject = myObj;
