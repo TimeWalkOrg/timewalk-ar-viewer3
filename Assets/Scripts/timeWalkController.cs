@@ -92,24 +92,7 @@ public class timeWalkController : MonoBehaviour
     void Update()
 
     {
-        //// Get a specific gameobject with its name
-        //trackables = GameObject.Find("Trackables");
-        ////debugText.text = "LIST: ";
-        //trackablesTotal = 0;
-        ////Debug.Log(trackables.name);
-        //// To find child in a specific gameobject
-        //foreach (Transform child in trackables.transform)
-        //{
-        //    //Debug.Log(child.name);
-        //    //debugText.text += child.name + "\n";
-        //    trackablesTotal++;
-        //}
-        ////debugText.text = "TOTAL " + counterText + "\n" + debugText.text;
-        //if(trackablesTotal > 0)
-        //{
-        //    debugText.text = "FOUND PLANE!";
-        //    tutorialAnimationToHide.transform.gameObject.SetActive(false);
-        //}
+
     }
 
 

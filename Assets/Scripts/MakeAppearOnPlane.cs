@@ -19,6 +19,13 @@ public class MakeAppearOnPlane : MonoBehaviour
     Transform m_Content;
     public Text debugText;
 
+    public Transform arSessionOriginTransform;
+    public Transform arSessionTransform;
+    public Transform cameraTransform;
+    private GameObject trackablesObject;
+
+    private Vector3 cameraStartVector3;
+
     // Good examples of tracking here: https://github.com/google-ar/arcore-unity-sdk/blob/master/Assets/GoogleARCore/Examples/HelloAR/Scripts/HelloARController.cs
 
 
@@ -59,9 +66,11 @@ public class MakeAppearOnPlane : MonoBehaviour
         m_SessionOrigin = GetComponent<ARSessionOrigin>();
         m_RaycastManager = GetComponent<ARRaycastManager>();
 
+        cameraStartVector3 = cameraTransform.position; // remember the start position of the camera to restore it later!
+
         foreach (Transform child in content)
         {
-            child.gameObject.SetActive(false); // hide children of the content object
+            child.gameObject.SetActive(false); // hide children of the content object at start
         }
 
     }
@@ -69,11 +78,8 @@ public class MakeAppearOnPlane : MonoBehaviour
     void Update()
     {
         Touch touch; // per ARCore example (compare to below)
-        //var touch = Input.GetTouch(0);
 
-        //if (Input.touchCount == 0 || m_Content == null) // My OLD way
         if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
-
         {
             return; // don't update if just touched or m_Content is null (not set yet)
         }
@@ -96,9 +102,16 @@ public class MakeAppearOnPlane : MonoBehaviour
             // such that the content appears to be at the raycast hit position.
             m_SessionOrigin.MakeContentAppearAt(content, hitPose.position, m_Rotation);
 
-            debugText.text = "New hitPose in MakeAppear";
+            cameraTransform.position = cameraStartVector3;
 
-            // DELETE THIS BELOW?
+            trackablesObject = GameObject.Find("Trackables");
+
+            debugText.text = "hitPose: " + hitPose.position.ToString() + "\n"
+                + "camera: " + cameraTransform.position.ToString() + "\n"
+                + "Trackables: " + trackablesObject.transform.position.ToString();
+                //+ "arSession: " + arSessionTransform.position.ToString() + "\n";
+
+
             foreach (Transform child in content)
             {
                 child.gameObject.SetActive(true); // SHOW children of the content object
